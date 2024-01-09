@@ -71,7 +71,7 @@ if __name__ == '__main__':
     C = Point(np.array([0.6925275235382, 0.9504814392206]))
     D = Point(np.array([1.4985395878209, 1.5386524050485]))
     E = Point(np.array([2.311813022052, 0.9504814392206]))
-    listUnbalancedPoint = [A,B,C,D,E]
+
     
     A1 = Point(np.array([0.0,0.0]))
     A2 = Point(np.array([1.0,0.0]))
@@ -107,6 +107,8 @@ if __name__ == '__main__':
 
     listBalancedPoint = []
 
+    fig_num = 0
+    fig_path = "./4_4_images/"
 
     # Create a fully connected graph with listpoint
     G = nx.complete_graph(listUnbalancedPoint)
@@ -116,6 +118,10 @@ if __name__ == '__main__':
     pos = {node:node.position for node in G.nodes()}
     nx.draw(G, pos, with_labels=True, node_size=50, node_color='skyblue', font_size=10)
     plt.title("Fully Connected Graph")
+    
+    plt.savefig(fig_path+str(fig_num)+"X.png")
+    fig_num += 1
+    
     plt.pause(3)
     plt.close()
 
@@ -135,6 +141,9 @@ if __name__ == '__main__':
     pos = {node:node.position for node in mst.nodes()}
     nx.draw(mst, pos, with_labels=True, node_size=50, node_color='skyblue', font_size=10)
     plt.title("Minimum-Spanning-Tree")
+    plt.savefig(fig_path+str(fig_num)+"X.png")
+    fig_num += 1
+
     plt.pause(3)
 
     # Check all triples of connected nodes for acute angles
@@ -155,7 +164,7 @@ if __name__ == '__main__':
     # numberOfIter = 10 
     
     
-    movingRate = 0.1
+    movingRate = 0.2
     numberOfIterBal = 200
     epsilon = 1e-3
 
@@ -209,6 +218,8 @@ if __name__ == '__main__':
         node_colors = ['skyblue' if node not in listBalancedPoint else 'red' for node in mst.nodes()]
         nx.draw(mst, pos, with_labels=True, node_size=50, node_color=node_colors, font_size=10)
         ax.set_title("Add a new Fertmat Point")
+        plt.savefig(fig_path+str(fig_num)+"X.png")
+        fig_num += 1
         plt.pause(3)
         plt.close()
 
@@ -246,6 +257,8 @@ if __name__ == '__main__':
             node_colors = ['skyblue' if node not in listBalancedPoint else 'red' for node in mst.nodes()]
             nx.draw(mst, pos, with_labels=True, node_size=50, node_color=node_colors, font_size=10)
             ax.set_title("Balancing iter "+str(j))
+            plt.savefig(fig_path+"small_iter/"+str(fig_num)+"Y.png")
+            fig_num += 1
             plt.pause(0.1)
             plt.close()
 
@@ -259,6 +272,8 @@ if __name__ == '__main__':
     node_colors = ['skyblue' if node not in listBalancedPoint else 'red' for node in mst.nodes()]
     nx.draw(mst, pos, with_labels=False, node_size=50, node_color=node_colors, font_size=10)
     plt.title("Final Result")
+    plt.savefig(fig_path+str(fig_num)+"X.png")
+    fig_num += 1
     plt.show()
     
 
